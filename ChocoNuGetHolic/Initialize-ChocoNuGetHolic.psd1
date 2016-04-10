@@ -1,5 +1,5 @@
 ﻿# 
-# File: ChocolateyInstall.ps1
+# File: Initialize-ChocoNuGetHolic.psd1
 # 
 # Author: Akira Sugiura (urasandesu@gmail.com)
 # 
@@ -27,9 +27,6 @@
 #  THE SOFTWARE.
 #
 
-
-$chocoToolsPath = [IO.Path]::Combine($env:chocolateyPackageFolder, 'tools')
-
-$pkgName = 'ChocoNuGetHolic'
-$psFileFullPath = [IO.Path]::Combine($chocoToolsPath, 'Initialize-ChocoNuGetHolic.ps1')
-Install-ChocolateyPowershellCommand $pkgName $psFileFullPath
+@{
+NuGetVersion = '$NuGetVersion$'
+}

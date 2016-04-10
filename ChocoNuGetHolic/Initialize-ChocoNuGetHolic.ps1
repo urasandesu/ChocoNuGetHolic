@@ -82,9 +82,9 @@ function InitializeNuGetSpec {
     $file = $nuspec.CreateElement('file')
     $src = $nuspec.CreateAttribute('src')
     $src.Value = '..\..\lib\**\*.*'
+    [void]$file.Attributes.Append($src)
     $target = $nuspec.CreateAttribute('target')
     $target.Value = 'lib'
-    [void]$file.Attributes.Append($src)
     [void]$file.Attributes.Append($target)
     [void]$files.AppendChild($file)
     $file = $nuspec.CreateElement('file')
@@ -97,7 +97,7 @@ function InitializeNuGetSpec {
     [void]$files.AppendChild($file)
     [void]$nuspec.package.AppendChild($files)
     try {
-        $sw = New-Object System.IO.StreamWriter "$PackageName.nuspec"
+        $sw = New-Object IO.StreamWriter "$PackageName.nuspec"
         $nuspec.Save($sw)
     } finally {
         if ($null -ne $sw) {
@@ -125,14 +125,16 @@ function InitializeChocolateySpec {
     $file = $nuspec.CreateElement('file')
     $src = $nuspec.CreateAttribute('src')
     $src.Value = 'tools\**\*.*'
+    [void]$file.Attributes.Append($src)
     $target = $nuspec.CreateAttribute('target')
     $target.Value = 'tools'
-    [void]$file.Attributes.Append($src)
     [void]$file.Attributes.Append($target)
     [void]$files.AppendChild($file)
     [void]$nuspec.package.AppendChild($files)
+    $nuspec.package.metadata.dependencies.dependency.id = 'nuget.commandline'
+    $nuspec.package.metadata.dependencies.dependency.version = $Resources.NuGetVersion
     try {
-        $sw = New-Object System.IO.StreamWriter "$PackageName.nuspec"
+        $sw = New-Object IO.StreamWriter "$PackageName.nuspec"
         $nuspec.Save($sw)
     } finally {
         if ($null -ne $sw) {
@@ -143,11 +145,15 @@ function InitializeChocolateySpec {
 
 
 
+$here = Split-Path $MyInvocation.MyCommand.Path
+
+Import-LocalizedData Resources
+
 if ([string]::IsNullOrEmpty($Source)) {
     $Source = $PWD
 }
 
-Copy-Item ([IO.Path]::Combine((Split-Path $MyInvocation.MyCommand.Path), 'Chocolatey')) $Source -Recurse -Force
+Copy-Item ([IO.Path]::Combine($here, 'Chocolatey')) $Source -Recurse -Force
 
 PushLocationTemporarily $Source {
     PushLocationTemporarily Chocolatey {

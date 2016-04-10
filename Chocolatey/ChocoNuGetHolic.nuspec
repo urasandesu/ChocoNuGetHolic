@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ChocoNuGetHolic</id>
+    <version>0.0.0</version>
+    <title>ChocoNuGetHolic</title>
+    <authors>Akira Sugiura</authors>
+    <owners>Akira Sugiura</owners>
+    <licenseUrl>https://github.com/urasandesu/ChocoNuGetHolic/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/urasandesu/ChocoNuGetHolic</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+      Meta package management experiment for Chocolatey and NuGet.
+    </summary>
+    <description>
+      Haven't you ever experienced that "I created a awesome library! However, this depends on a machine wide installed software and a project wide installed library... What should I select package manager? "? For example, ORM that is specialized for a DB, extension library for a VSIX, template that permits to easily write the plugin of a CI system and so on. This is a solution to resolve such dependency using Chocolatey and NuGet.
+    </description>
+    <copyright>(c) 2016 Akira Sugiura. All rights reserved.</copyright>
+    <tags>nuget chocolatey</tags>
+    <releaseNotes>Version 0.0.0
+* Initial release.
+
+
+About more previous versions, please see https://github.com/urasandesu/ChocoNuGetHolic/releases .
+    </releaseNotes>
+    <dependencies>
+      <dependency id="nuget.commandline" version="3.3.0" />
+    </dependencies> 
+  </metadata>
+  <files>
+    <file src="tools\**\*.*" target="tools" />
+    <file src="..\ChocoNuGetHolic\**\*.*" target="tools" />
+  </files>
+</package>
