@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>ChocoNuGetHolic</id>
+    <id>ChocoNuGetHolic.template</id>
     <version>0.0.0</version>
-    <title>ChocoNuGetHolic</title>
+    <title>ChocoNuGetHolic Template</title>
     <authors>Akira Sugiura</authors>
     <owners>Akira Sugiura</owners>
     <licenseUrl>https://github.com/urasandesu/ChocoNuGetHolic/blob/master/LICENSE.md</licenseUrl>
@@ -13,7 +13,7 @@
       Meta package management experiment for Chocolatey and NuGet.
     </summary>
     <description>
-      Haven't you ever experienced that "I created a awesome library! However, this depends on a machine wide installed software and a project wide installed library... What should I select package manager? "? For example, ORM that is specialized for a DB, extension library for a VSIX, template that permits to easily write the plugin of a CI system and so on. This is a solution to resolve such dependency using Chocolatey and NuGet.
+      Haven't you ever experienced as follows?: **"I created an awesome library! However, this depends on a machine wide installed software and a project wide installed library... How should I distribute this package? What should I select package manager?"** For example, ORM that is specialized for a DB, extension library for a VSIX, template that permits to easily write the plugin of a CI system and so on. --- This is one of the solution to resolve such dependency problem by Chocolatey and NuGet.
     </description>
     <copyright>(c) 2016 Akira Sugiura. All rights reserved.</copyright>
     <tags>nuget chocolatey</tags>
@@ -28,7 +28,8 @@ About more previous versions, please see https://github.com/urasandesu/ChocoNuGe
     </dependencies> 
   </metadata>
   <files>
-    <file src="tools\**\*.*" target="tools" />
-    <file src="..\ChocoNuGetHolic\**\*.*" target="tools" />
+    <file src="ChocolateyInstall.ps1" target="" />
+    <file src="ChocolateyUninstall.ps1" target="" />
+    <file src="..\ChocoNuGetHolic\**\*.*" target="" />
   </files>
 </package>

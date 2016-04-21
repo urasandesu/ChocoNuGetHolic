@@ -119,28 +119,29 @@ function InitializeChocolateySpec {
         $PackageName
     )
 
-    nuget spec $PackageName | Out-Null
-    $nuspec = [xml](gc "$PackageName.nuspec")
-    $files = $nuspec.CreateElement('files')
-    $file = $nuspec.CreateElement('file')
-    $src = $nuspec.CreateAttribute('src')
-    $src.Value = 'tools\**\*.*'
-    [void]$file.Attributes.Append($src)
-    $target = $nuspec.CreateAttribute('target')
-    $target.Value = 'tools'
-    [void]$file.Attributes.Append($target)
-    [void]$files.AppendChild($file)
-    [void]$nuspec.package.AppendChild($files)
-    $nuspec.package.metadata.dependencies.dependency.id = 'nuget.commandline'
-    $nuspec.package.metadata.dependencies.dependency.version = $Resources.NuGetVersion
-    try {
-        $sw = New-Object IO.StreamWriter "$PackageName.nuspec"
-        $nuspec.Save($sw)
-    } finally {
-        if ($null -ne $sw) {
-            $sw.Dispose()
-        }
-    }
+    choco new $PackageName -t ChocoNuGetHolic
+    #nuget spec $PackageName | Out-Null
+    #$nuspec = [xml](gc "$PackageName.nuspec")
+    #$files = $nuspec.CreateElement('files')
+    #$file = $nuspec.CreateElement('file')
+    #$src = $nuspec.CreateAttribute('src')
+    #$src.Value = 'tools\**\*.*'
+    #[void]$file.Attributes.Append($src)
+    #$target = $nuspec.CreateAttribute('target')
+    #$target.Value = 'tools'
+    #[void]$file.Attributes.Append($target)
+    #[void]$files.AppendChild($file)
+    #[void]$nuspec.package.AppendChild($files)
+    #$nuspec.package.metadata.dependencies.dependency.id = 'nuget.commandline'
+    #$nuspec.package.metadata.dependencies.dependency.version = $Resources.NuGetVersion
+    #try {
+    #    $sw = New-Object IO.StreamWriter "$PackageName.nuspec"
+    #    $nuspec.Save($sw)
+    #} finally {
+    #    if ($null -ne $sw) {
+    #        $sw.Dispose()
+    #    }
+    #}
 }
 
 
@@ -153,7 +154,7 @@ if ([string]::IsNullOrEmpty($Source)) {
     $Source = $PWD
 }
 
-Copy-Item ([IO.Path]::Combine($here, 'Chocolatey')) $Source -Recurse -Force
+#Copy-Item ([IO.Path]::Combine($here, 'Chocolatey')) $Source -Recurse -Force
 
 PushLocationTemporarily $Source {
     PushLocationTemporarily Chocolatey {
